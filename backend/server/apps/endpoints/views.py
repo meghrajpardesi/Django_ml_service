@@ -3,7 +3,7 @@ from rest_framework import viewsets, mixins
 # Create your views here.
 from rest_framework.exceptions import APIException
 
-from apps.endpoints.models import MLAlgorithm, Endpoint, MLAlgorithmStatus, MLRequest
+from apps.endpoints.models import MLAlgorithmStatus, Endpoint, MLAlgorithmStatus, MLRequest
 from apps.endpoints.serializers import EndpointSerializer, MLAlgorthmSerializer, \
     MLAlgorithmStatusSerializer, MLRequestSerializer
 
@@ -14,7 +14,7 @@ class EndpointViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets
 
 class MLAlgorithmViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = MLAlgorthmSerializer
-    queryset = MLAlgorithm.objects.all()
+    queryset = MLAlgorithmStatus.objects.all()
 
 def deactivate_other_statuses(instance):
     old_statuses = MLAlgorithmStatus.objects.filter(parent_mlalgorithm = instance.parent_mlalgorithm,
